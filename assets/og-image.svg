@@ -1,0 +1,23 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#fff1dd"/>
+      <stop offset="100%" stop-color="#f2e7d9"/>
+    </linearGradient>
+    <linearGradient id="badge" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#f18f01"/>
+      <stop offset="100%" stop-color="#5b8c5a"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="980" cy="-40" r="260" fill="#f8d3a0" opacity="0.55"/>
+  <circle cx="-40" cy="620" r="240" fill="#cfe3c7" opacity="0.55"/>
+  <rect x="90" y="110" width="1020" height="410" rx="42" fill="#ffffff" opacity="0.95"/>
+  <rect x="140" y="160" width="200" height="200" rx="44" fill="url(#badge)"/>
+  <circle cx="240" cy="230" r="60" fill="#fff"/>
+  <rect x="200" y="300" width="80" height="20" rx="10" fill="#fff" opacity="0.8"/>
+  <text x="420" y="240" font-size="54" font-family="'Space Grotesk','Noto Sans SC',sans-serif" fill="#1f1a17">食物热量计算器</text>
+  <text x="420" y="300" font-size="28" font-family="'Noto Sans SC',sans-serif" fill="#6e615a">一键拍照识别 · 热量 & 营养素估算</text>
+  <text x="420" y="360" font-size="24" font-family="'Noto Sans SC',sans-serif" fill="#9b8a7f">Calorie Sense H5</text>
+  <text x="980" y="470" font-size="20" font-family="'Space Grotesk',sans-serif" fill="#9b8a7f" text-anchor="end">share image</text>
+</svg>

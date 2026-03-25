@@ -1,0 +1,184 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>食物热量计算器 H5 · 拍照识别热量与营养素</title>
+  <meta name="description" content="食物热量计算器 H5：一键拍照识别食物，估算热量、蛋白质、碳水与脂肪，支持手动补充。" />
+  <meta name="keywords" content="食物热量,热量计算器,营养素,拍照识别,H5" />
+  <meta name="theme-color" content="#f18f01" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="食物热量计算器 H5 · 拍照识别热量与营养素" />
+  <meta property="og:description" content="一键拍照识别食物，估算热量、蛋白质、碳水与脂肪，支持手动补充。" />
+  <meta property="og:image" content="assets/og-image.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="食物热量计算器 H5 · 拍照识别热量与营养素" />
+  <meta name="twitter:description" content="一键拍照识别食物，估算热量、蛋白质、碳水与脂肪。" />
+  <meta name="twitter:image" content="assets/og-image.svg" />
+  <link rel="icon" href="assets/icon.svg" />
+  <link rel="apple-touch-icon" href="assets/icon.svg" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <header class="hero">
+    <div class="hero__content">
+      <p class="hero__eyebrow">Calorie Sense · H5</p>
+      <h1>食物热量计算器</h1>
+      <p class="hero__sub">拍照识别 + 智能估算，每一口都更清楚。</p>
+      <div class="hero__actions">
+        <button id="openCameraBtn" class="btn btn--primary">
+          <span class="icon">📷</span>
+          一键拍照识别
+        </button>
+        <button id="clearAllBtn" class="btn btn--ghost">清空记录</button>
+      </div>
+    </div>
+    <div class="hero__panel">
+      <div class="stat-grid">
+        <div class="stat">
+          <p class="stat__label">今日总热量</p>
+          <p class="stat__value"><span id="totalCalories">0</span> kcal</p>
+        </div>
+        <div class="stat">
+          <p class="stat__label">已记录食物</p>
+          <p class="stat__value"><span id="totalItems">0</span> 项</p>
+        </div>
+      </div>
+      <div class="macro-grid">
+        <div class="macro">
+          <p class="macro__label">蛋白质</p>
+          <p class="macro__value"><span id="totalProtein">0</span> g</p>
+        </div>
+        <div class="macro">
+          <p class="macro__label">碳水</p>
+          <p class="macro__value"><span id="totalCarbs">0</span> g</p>
+        </div>
+        <div class="macro">
+          <p class="macro__label">脂肪</p>
+          <p class="macro__value"><span id="totalFat">0</span> g</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="grid">
+    <section class="card" id="captureCard">
+      <div class="card__header">
+        <h2>拍照识别</h2>
+        <p>支持相机与相册；识别结果可一键添加。</p>
+      </div>
+
+      <div class="capture">
+        <input id="fileInput" type="file" accept="image/*" capture="environment" hidden />
+        <div id="preview" class="preview">
+          <div class="preview__placeholder">
+            <div class="preview__icon">🍽️</div>
+            <p>上传或拍摄食物照片</p>
+          </div>
+          <img id="previewImage" alt="预览" />
+        </div>
+        <div class="capture__actions">
+          <button id="choosePhotoBtn" class="btn">选择照片</button>
+          <button id="recognizeBtn" class="btn btn--primary" disabled>开始识别</button>
+        </div>
+        <div class="status-row">
+          <div id="recognizeStatus" class="status"></div>
+          <button id="retryBtn" class="btn btn--ghost" hidden>重试识别</button>
+        </div>
+        <div class="status-meta">
+          <span id="retryCount">重试次数：0</span>
+          <span id="errorMessage"></span>
+        </div>
+        <div class="api-config">
+          <label for="apiEndpointInput">识别服务地址</label>
+          <div class="api-config__row">
+            <input id="apiEndpointInput" type="url" placeholder="https://your-domain/api/recognize" />
+            <button id="apiSaveBtn" class="btn btn--ghost">保存</button>
+          </div>
+          <p class="api-config__tip">留空则使用默认 /api/recognize（本地代理）。</p>
+        </div>
+      </div>
+
+      <div class="recognize">
+        <div class="recognize__header">
+          <h3>识别结果</h3>
+          <span class="badge" id="recognizeBadge">等待识别</span>
+        </div>
+        <div id="recognizeList" class="recognize__list"></div>
+        <div class="recognize__history">
+          <h4>校正历史</h4>
+          <div id="correctionList" class="recognize__history-list"></div>
+          <div class="recognize__history-actions">
+            <button id="clearCorrectionsBtn" class="btn btn--ghost">清空历史</button>
+          </div>
+        </div>
+        <p class="recognize__hint">营养素为估算值，请结合实际标签或配料表。</p>
+      </div>
+
+      <div class="debug">
+        <div class="debug__header">
+          <h3>调试面板</h3>
+          <button id="toggleDebugBtn" class="btn btn--ghost">展开</button>
+        </div>
+        <div id="debugBody" class="debug__body" hidden>
+          <pre id="debugOutput" class="debug__output">暂无数据</pre>
+          <div class="debug__actions">
+            <button id="copyDebugBtn" class="btn btn--ghost">复制原始数据</button>
+            <button id="exportDebugBtn" class="btn btn--ghost">导出 JSON</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card__header">
+        <h2>热量记录</h2>
+        <p>添加份量，自动计算总热量。</p>
+      </div>
+
+      <div class="meal">
+        <div class="meal__list" id="mealList"></div>
+      </div>
+
+      <div class="manual">
+        <h3>手动添加</h3>
+        <div class="manual__row">
+          <input id="manualName" type="text" placeholder="食物名称" />
+          <input id="manualCalories" type="number" min="0" placeholder="每100g热量" />
+          <input id="manualProtein" type="number" min="0" placeholder="蛋白质(g/100g)" />
+          <input id="manualCarbs" type="number" min="0" placeholder="碳水(g/100g)" />
+          <input id="manualFat" type="number" min="0" placeholder="脂肪(g/100g)" />
+          <input id="manualGrams" type="number" min="1" placeholder="份量(g)" />
+          <button id="manualAddBtn" class="btn btn--primary">添加</button>
+        </div>
+        <p class="manual__tip">示例：米饭 116kcal/100g，蛋白质 2.6g，碳水 25.9g。</p>
+      </div>
+    </section>
+
+    <section class="card tips">
+      <div class="card__header">
+        <h2>使用提示</h2>
+        <p>识别准确度会受光线、角度、食物摆盘影响。</p>
+      </div>
+      <ul class="tips__list">
+        <li>光线充足，避免过曝或阴影。</li>
+        <li>尽量让食物占据画面主体。</li>
+        <li>多食物混合时可手动补充。</li>
+        <li>热量为估算值，请结合实际标签。</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>本页为 H5 前端示例，可对接后端识别服务并发布上线。</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

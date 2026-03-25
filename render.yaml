@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: calorie-sense-proxy
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: LOGMEAL_APIUSER_TOKEN
+        sync: false
+      - key: LOGMEAL_API_BASE
+        value: https://api.logmeal.com
+      - key: LOGMEAL_NUTRITION_PATH
+        value: /v2/nutrition/recipe/nutritionalInfo
