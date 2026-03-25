@@ -13,6 +13,50 @@ const LOGMEAL_API_BASE = process.env.LOGMEAL_API_BASE || "https://api.logmeal.co
 const LOGMEAL_APIUSER_TOKEN = process.env.LOGMEAL_APIUSER_TOKEN || "";
 const LOGMEAL_NUTRITION_PATH = process.env.LOGMEAL_NUTRITION_PATH || "/v2/nutrition/recipe/nutritionalInfo";
 
+const MOCK_FOODS = [
+  { name: "米饭", caloriesPer100: 116, proteinPer100: 2.6, carbsPer100: 25.9, fatPer100: 0.3 },
+  { name: "鸡胸肉", caloriesPer100: 165, proteinPer100: 31, carbsPer100: 0, fatPer100: 3.6 },
+  { name: "牛油果", caloriesPer100: 160, proteinPer100: 2, carbsPer100: 8.5, fatPer100: 14.7 },
+  { name: "生菜沙拉", caloriesPer100: 35, proteinPer100: 2.2, carbsPer100: 4, fatPer100: 1.5 },
+  { name: "炸鸡", caloriesPer100: 280, proteinPer100: 18, carbsPer100: 13, fatPer100: 18 },
+  { name: "披萨", caloriesPer100: 266, proteinPer100: 11, carbsPer100: 33, fatPer100: 10 },
+  { name: "苹果", caloriesPer100: 52, proteinPer100: 0.3, carbsPer100: 14, fatPer100: 0.2 },
+  { name: "香蕉", caloriesPer100: 89, proteinPer100: 1.1, carbsPer100: 23, fatPer100: 0.3 }
+];
+
+const pickMockItems = (filename = "") => {
+  const name = filename.toLowerCase();
+  const hintMap = [
+    { key: "rice", name: "米饭" },
+    { key: "fan", name: "米饭" },
+    { key: "chicken", name: "鸡胸肉" },
+    { key: "salad", name: "生菜沙拉" },
+    { key: "pizza", name: "披萨" },
+    { key: "apple", name: "苹果" },
+    { key: "banana", name: "香蕉" }
+  ];
+
+  const hinted = hintMap.find((hint) => name.includes(hint.key));
+  const primary = hinted
+    ? MOCK_FOODS.find((food) => food.name === hinted.name)
+    : MOCK_FOODS[Math.floor(Math.random() * MOCK_FOODS.length)];
+
+  const others = MOCK_FOODS.filter((food) => food.name !== primary.name)
+    .sort(() => 0.5 - Math.random())
+    .slice(0, 2);
+
+  const items = [primary, ...others].map((food, index) => ({
+    name: food.name,
+    confidence: index === 0 ? 0.86 : 0.55 - index * 0.1,
+    caloriesPer100: food.caloriesPer100,
+    proteinPer100: food.proteinPer100,
+    carbsPer100: food.carbsPer100,
+    fatPer100: food.fatPer100
+  }));
+
+  return items;
+};
+
 app.use(cors());
 
 const publicRoot = __dirname;
@@ -127,7 +171,13 @@ const getCandidates = (segData) => {
 
 app.post("/api/recognize", upload.single("image"), async (req, res) => {
   if (!LOGMEAL_APIUSER_TOKEN) {
-    return res.status(500).json({ error: "LOGMEAL_APIUSER_TOKEN 未配置" });
+    const items = pickMockItems(req.file?.originalname || "");
+    return res.json({
+      source: "mock",
+      reason: "missing_token",
+      items,
+      raw: { note: "LOGMEAL_APIUSER_TOKEN 未配置，返回模拟识别结果。" }
+    });
   }
 
   if (!req.file) {

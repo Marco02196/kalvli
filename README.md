@@ -14,7 +14,7 @@ npm install
 
 2. 配置环境变量
 
-复制 `.env.example` 为 `.env`，填写 `LOGMEAL_APIUSER_TOKEN`。
+复制 `.env.example` 为 `.env`，填写 `LOGMEAL_APIUSER_TOKEN`（可选）。没有 token 时会返回模拟识别结果。
 
 3. 启动代理服务
 
