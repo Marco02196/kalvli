@@ -1,4 +1,4 @@
-﻿const DEFAULT_RECOGNITION_ENDPOINT = "/api/recognize";
+﻿const DEFAULT_RECOGNITION_ENDPOINT = "https://kalvli-1.onrender.com/api/recognize";
 const API_STORAGE_KEY = "recognitionEndpoint";
 let recognitionEndpoint = DEFAULT_RECOGNITION_ENDPOINT;
 
