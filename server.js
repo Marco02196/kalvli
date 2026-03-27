@@ -69,8 +69,10 @@ const buildMockResponse = (filename = "", note = "使用模拟识别结果。") 
 app.use(cors());
 
 const publicRoot = __dirname;
+app.use(express.static(publicRoot));
 app.use("/assets", express.static(path.join(publicRoot, "assets")));
 app.get("/", (req, res) => res.sendFile(path.join(publicRoot, "index.html")));
+app.get("/login", (req, res) => res.sendFile(path.join(publicRoot, "login.html")));
 app.get("/styles.css", (req, res) => res.sendFile(path.join(publicRoot, "styles.css")));
 app.get("/app.js", (req, res) => res.sendFile(path.join(publicRoot, "app.js")));
 app.get("/manifest.json", (req, res) => res.sendFile(path.join(publicRoot, "manifest.json")));

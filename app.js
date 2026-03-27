@@ -1,6 +1,10 @@
 ﻿const DEFAULT_RECOGNITION_ENDPOINT = "https://kalvli-1.onrender.com/api/recognize";
 const API_STORAGE_KEY = "recognitionEndpoint";
-let recognitionEndpoint = DEFAULT_RECOGNITION_ENDPOINT;
+const RUNTIME_RECOGNITION_ENDPOINT =
+  window.location.origin && window.location.origin !== "null"
+    ? `${window.location.origin}/api/recognize`
+    : "/api/recognize";
+let recognitionEndpoint = RUNTIME_RECOGNITION_ENDPOINT;
 
 const FOOD_DB = [
   { name: "米饭", calories: 116, protein: 2.6, carbs: 25.9, fat: 0.3 },
@@ -70,7 +74,7 @@ const getEndpointFromQuery = () => {
 
 const syncEndpointToUI = () => {
   if (!apiEndpointInput) return;
-  apiEndpointInput.value = recognitionEndpoint === DEFAULT_RECOGNITION_ENDPOINT ? "" : recognitionEndpoint;
+  apiEndpointInput.value = recognitionEndpoint === RUNTIME_RECOGNITION_ENDPOINT ? "" : recognitionEndpoint;
 };
 
 const initApiEndpoint = () => {
@@ -213,6 +217,8 @@ const handleFileChange = (event) => {
   currentFile = file;
   updatePreview(file);
   recognizeBtn.disabled = false;
+  setRetryVisible(false);
+  setErrorMessage("");
   setStatus(`已选择图片：${file.name}`);
   setBadge("准备识别");
 };
@@ -729,7 +735,7 @@ if (apiSaveBtn) {
   apiSaveBtn.addEventListener("click", () => {
     const value = apiEndpointInput?.value.trim();
     if (!value) {
-      recognitionEndpoint = DEFAULT_RECOGNITION_ENDPOINT;
+      recognitionEndpoint = RUNTIME_RECOGNITION_ENDPOINT;
       localStorage.removeItem(API_STORAGE_KEY);
       syncEndpointToUI();
       setStatus("已恢复默认识别地址。", "success");

@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Calorie Sense Login</title>
+  <meta
+    name="description"
+    content="A modern Calorie Sense login page with a polished brand panel, responsive layout, and lightweight form interactions."
+  />
+  <meta name="theme-color" content="#103a36" />
+  <link rel="icon" href="assets/icon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="login.css" />
+</head>
+<body class="login-page">
+  <div class="login-bg login-bg--grid"></div>
+  <div class="login-bg login-bg--noise"></div>
+  <div class="login-orb login-orb--mint"></div>
+  <div class="login-orb login-orb--coral"></div>
+  <div class="login-orb login-orb--gold"></div>
+
+  <main class="login-shell">
+    <section class="brand-panel">
+      <div class="brand-panel__content">
+        <p class="brand-panel__eyebrow">Calorie Sense</p>
+        <h1>Make healthy tracking feel as polished as logging into a premium product.</h1>
+        <p class="brand-panel__lead">
+          This page keeps the clarity of a modern SaaS sign-in screen while adding warmer materials, softer lighting, and product-facing copy that feels more intentional.
+        </p>
+
+        <div class="brand-panel__stats">
+          <article class="metric-card">
+            <span class="metric-card__value">12.4k</span>
+            <span class="metric-card__label">active nutrition members</span>
+          </article>
+          <article class="metric-card">
+            <span class="metric-card__value">94%</span>
+            <span class="metric-card__label">7 day sign-in retention</span>
+          </article>
+        </div>
+
+        <div class="feature-list">
+          <article class="feature-card">
+            <span class="feature-card__icon">01</span>
+            <div>
+              <h2>Unified access</h2>
+              <p>Email sign-in, enterprise SSO, and OAuth expansion all fit naturally into this structure.</p>
+            </div>
+          </article>
+          <article class="feature-card">
+            <span class="feature-card__icon">02</span>
+            <div>
+              <h2>Mobile first</h2>
+              <p>The split layout collapses cleanly on small screens, with tap-friendly controls and spacing.</p>
+            </div>
+          </article>
+          <article class="feature-card">
+            <span class="feature-card__icon">03</span>
+            <div>
+              <h2>Lightweight interactions</h2>
+              <p>Password reveal, form validation, remembered email, and success feedback are built in.</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="quote-card">
+          <p>
+            "The sign-in page is often the first moment a product has to feel trustworthy. Clarity matters more than adding extra chrome."
+          </p>
+          <span>Product Design Note</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="auth-panel">
+        <div class="auth-panel__card">
+          <div class="auth-panel__header">
+            <a class="brand-badge" href="/">
+              <img src="assets/icon.svg" alt="Calorie Sense" />
+              <span>Calorie Sense</span>
+            </a>
+            <a class="text-link" href="/">Back to demo</a>
+          </div>
+
+          <div class="auth-copy">
+            <p class="auth-copy__eyebrow">Welcome back</p>
+            <h2>Sign in to your health workspace</h2>
+            <p>Continue to photo recognition, nutrition logs, and your personal daily progress.</p>
+          </div>
+
+        <form id="loginForm" class="auth-form" novalidate>
+          <label class="field">
+            <span>Email address</span>
+            <input
+              id="emailInput"
+              name="email"
+              type="email"
+              placeholder="name@company.com"
+              autocomplete="username"
+              required
+            />
+          </label>
+
+          <label class="field">
+            <span>Password</span>
+            <div class="password-field">
+              <input
+                id="passwordInput"
+                name="password"
+                type="password"
+                placeholder="At least 6 characters"
+                autocomplete="current-password"
+                required
+                minlength="6"
+              />
+              <button id="togglePasswordBtn" class="password-toggle" type="button" aria-label="Show password">
+                Show
+              </button>
+            </div>
+          </label>
+
+          <div class="form-row">
+            <label class="checkbox">
+              <input id="rememberInput" type="checkbox" />
+              <span>Remember my email</span>
+            </label>
+            <a class="text-link" href="/">Forgot password?</a>
+          </div>
+
+          <button id="loginBtn" class="primary-btn" type="submit">
+            <span class="primary-btn__text">Sign in and continue</span>
+            <span class="primary-btn__shine"></span>
+          </button>
+
+          <p id="formMessage" class="form-message" aria-live="polite"></p>
+
+          <div class="divider">
+            <span>Or continue with</span>
+          </div>
+
+          <div class="provider-grid">
+            <button class="provider-btn" type="button" data-provider="Google">Google</button>
+            <button class="provider-btn" type="button" data-provider="GitHub">GitHub</button>
+            <button class="provider-btn" type="button" data-provider="Enterprise SSO">Enterprise SSO</button>
+          </div>
+        </form>
+
+        <p class="auth-footnote">
+          No account yet? <a class="text-link" href="/">Explore the demo first</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script src="login.js"></script>
+</body>
+</html>
