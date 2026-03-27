@@ -9,6 +9,8 @@ require("dotenv").config();
 const app = express();
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 10 * 1024 * 1024 } });
 
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY || "";
+const OPENAI_MODEL = process.env.OPENAI_MODEL || "gpt-4.1-mini";
 const LOGMEAL_API_BASE = process.env.LOGMEAL_API_BASE || "https://api.logmeal.com";
 const LOGMEAL_APIUSER_TOKEN = process.env.LOGMEAL_APIUSER_TOKEN || "";
 const LOGMEAL_NUTRITION_PATH = process.env.LOGMEAL_NUTRITION_PATH || "/v2/nutrition/recipe/nutritionalInfo";
@@ -56,6 +58,13 @@ const pickMockItems = (filename = "") => {
 
   return items;
 };
+
+const buildMockResponse = (filename = "", note = "使用模拟识别结果。") => ({
+  source: "mock",
+  reason: "fallback",
+  items: pickMockItems(filename),
+  raw: { note }
+});
 
 app.use(cors());
 
@@ -169,73 +178,188 @@ const getCandidates = (segData) => {
   return candidates;
 };
 
-app.post("/api/recognize", upload.single("image"), async (req, res) => {
-  if (!LOGMEAL_APIUSER_TOKEN) {
-    const items = pickMockItems(req.file?.originalname || "");
-    return res.json({
-      source: "mock",
-      reason: "missing_token",
-      items,
-      raw: { note: "LOGMEAL_APIUSER_TOKEN 未配置，返回模拟识别结果。" }
+const extractOpenAIOutputText = (data) => {
+  if (typeof data?.output_text === "string" && data.output_text.trim()) {
+    return data.output_text.trim();
+  }
+
+  const chunks = [];
+  const outputs = Array.isArray(data?.output) ? data.output : [];
+  outputs.forEach((entry) => {
+    const content = Array.isArray(entry?.content) ? entry.content : [];
+    content.forEach((item) => {
+      if (typeof item?.text === "string" && item.text.trim()) {
+        chunks.push(item.text.trim());
+      }
+      if (typeof item?.output_text === "string" && item.output_text.trim()) {
+        chunks.push(item.output_text.trim());
+      }
     });
+  });
+
+  return chunks.join("\n").trim();
+};
+
+const analyzeWithOpenAI = async (file) => {
+  const imageDataUrl = `data:${file.mimetype};base64,${file.buffer.toString("base64")}`;
+  const schema = {
+    type: "object",
+    additionalProperties: false,
+    required: ["items"],
+    properties: {
+      items: {
+        type: "array",
+        maxItems: 3,
+        items: {
+          type: "object",
+          additionalProperties: false,
+          required: [
+            "name",
+            "confidence",
+            "caloriesPer100",
+            "proteinPer100",
+            "carbsPer100",
+            "fatPer100"
+          ],
+          properties: {
+            name: { type: "string" },
+            confidence: { type: "number" },
+            caloriesPer100: { type: "number" },
+            proteinPer100: { type: "number" },
+            carbsPer100: { type: "number" },
+            fatPer100: { type: "number" }
+          }
+        }
+      }
+    }
+  };
+
+  const requestBody = {
+    model: OPENAI_MODEL,
+    input: [
+      {
+        role: "user",
+        content: [
+          {
+            type: "input_text",
+            text:
+              "你是食物识别与营养估算助手。分析这张食物图片，识别最多 3 个最明显的食物。输出简体中文通用菜名。对每个食物给出 0 到 1 的置信度，并估算每 100g 的热量、蛋白质、碳水、脂肪。只保留画面中较确定的食物；如果不是食物图片，返回空数组。"
+          },
+          {
+            type: "input_image",
+            image_url: imageDataUrl,
+            detail: "high"
+          }
+        ]
+      }
+    ],
+    text: {
+      format: {
+        type: "json_schema",
+        name: "food_analysis",
+        strict: true,
+        schema
+      }
+    }
+  };
+
+  const response = await fetch("https://api.openai.com/v1/responses", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${OPENAI_API_KEY}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(requestBody)
+  });
+
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data?.error?.message || "OpenAI 请求失败");
   }
 
-  if (!req.file) {
-    return res.status(400).json({ error: "缺少图片文件" });
+  const outputText = extractOpenAIOutputText(data);
+  if (!outputText) {
+    throw new Error("OpenAI 未返回可解析结果");
   }
 
+  let parsed;
   try {
-    const formData = new FormData();
-    formData.append("image", req.file.buffer, {
-      filename: req.file.originalname || "upload.jpg",
-      contentType: req.file.mimetype
-    });
+    parsed = JSON.parse(outputText);
+  } catch (error) {
+    throw new Error("OpenAI 返回的 JSON 无法解析");
+  }
 
-    const segmentationResponse = await fetch(`${LOGMEAL_API_BASE}/v2/image/segmentation/complete`, {
+  const items = Array.isArray(parsed?.items) ? parsed.items : [];
+  return {
+    source: "openai",
+    model: OPENAI_MODEL,
+    items: items.map((item) => ({
+      name: (item.name || "未知食物").toString().trim(),
+      confidence: Number(item.confidence) || 0,
+      caloriesPer100: Number(item.caloriesPer100) || 0,
+      proteinPer100: Number(item.proteinPer100) || 0,
+      carbsPer100: Number(item.carbsPer100) || 0,
+      fatPer100: Number(item.fatPer100) || 0
+    })),
+    raw: data
+  };
+};
+
+const analyzeWithLogMeal = async (file) => {
+  const formData = new FormData();
+  formData.append("image", file.buffer, {
+    filename: file.originalname || "upload.jpg",
+    contentType: file.mimetype
+  });
+
+  const segmentationResponse = await fetch(`${LOGMEAL_API_BASE}/v2/image/segmentation/complete`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${LOGMEAL_APIUSER_TOKEN}`,
+      ...formData.getHeaders()
+    },
+    body: formData
+  });
+
+  if (!segmentationResponse.ok) {
+    const text = await segmentationResponse.text();
+    throw new Error(`LogMeal 识别失败: ${text}`);
+  }
+
+  const segmentationData = await segmentationResponse.json();
+  const imageId = getImageId(segmentationData);
+
+  let nutritionData = null;
+  if (imageId) {
+    const nutritionResponse = await fetch(`${LOGMEAL_API_BASE}${LOGMEAL_NUTRITION_PATH}`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${LOGMEAL_APIUSER_TOKEN}`,
-        ...formData.getHeaders()
+        "Content-Type": "application/json"
       },
-      body: formData
+      body: JSON.stringify({ imageId })
     });
 
-    if (!segmentationResponse.ok) {
-      const text = await segmentationResponse.text();
-      return res.status(502).json({ error: "LogMeal 识别失败", detail: text });
+    if (nutritionResponse.ok) {
+      nutritionData = await nutritionResponse.json();
     }
+  }
 
-    const segmentationData = await segmentationResponse.json();
-    const imageId = getImageId(segmentationData);
+  const candidates = getCandidates(segmentationData);
+  const nutritionMap = new Map();
+  const nutritionItems = nutritionData?.nutritional_info_per_item || nutritionData?.items || [];
 
-    let nutritionData = null;
-    if (imageId) {
-      const nutritionResponse = await fetch(`${LOGMEAL_API_BASE}${LOGMEAL_NUTRITION_PATH}`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${LOGMEAL_APIUSER_TOKEN}`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ imageId })
-      });
+  if (Array.isArray(nutritionItems)) {
+    nutritionItems.forEach((entry, idx) => {
+      const key = entry.food_item_position ?? entry.position ?? idx;
+      nutritionMap.set(key, extractNutrients(entry));
+    });
+  }
 
-      if (nutritionResponse.ok) {
-        nutritionData = await nutritionResponse.json();
-      }
-    }
-
-    const candidates = getCandidates(segmentationData);
-    const nutritionMap = new Map();
-
-    const nutritionItems = nutritionData?.nutritional_info_per_item || nutritionData?.items || [];
-    if (Array.isArray(nutritionItems)) {
-      nutritionItems.forEach((entry, idx) => {
-        const key = entry.food_item_position ?? entry.position ?? idx;
-        nutritionMap.set(key, extractNutrients(entry));
-      });
-    }
-
-    const items = candidates.map((candidate) => {
+  return {
+    source: "logmeal",
+    imageId,
+    items: candidates.map((candidate) => {
       const nutrients = nutritionMap.get(candidate.position) || {};
       return {
         name: candidate.name,
@@ -245,19 +369,71 @@ app.post("/api/recognize", upload.single("image"), async (req, res) => {
         carbsPer100: nutrients.carbsPer100 ?? null,
         fatPer100: nutrients.fatPer100 ?? null
       };
-    });
+    }),
+    raw: {
+      segmentation: segmentationData,
+      nutrition: nutritionData
+    }
+  };
+};
+
+app.post("/api/recognize", upload.single("image"), async (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ error: "缺少图片文件" });
+  }
+
+  try {
+    if (OPENAI_API_KEY) {
+      const openAIResult = await analyzeWithOpenAI(req.file);
+      if (openAIResult.items.length > 0) {
+        return res.json(openAIResult);
+      }
+    }
+
+    if (LOGMEAL_APIUSER_TOKEN) {
+      const logMealResult = await analyzeWithLogMeal(req.file);
+      if (logMealResult.items.length > 0) {
+        return res.json(logMealResult);
+      }
+    }
+
+    return res.json(
+      buildMockResponse(
+        req.file.originalname || "",
+        "未配置 OPENAI_API_KEY / LOGMEAL_APIUSER_TOKEN，或识别结果为空，返回模拟识别结果。"
+      )
+    );
+  } catch (error) {
+    if (LOGMEAL_APIUSER_TOKEN) {
+      try {
+        const logMealResult = await analyzeWithLogMeal(req.file);
+        if (logMealResult.items.length > 0) {
+          return res.json({
+            ...logMealResult,
+            raw: {
+              fallbackFrom: "openai",
+              openaiError: error.message,
+              logmeal: logMealResult.raw
+            }
+          });
+        }
+      } catch (logMealError) {
+        return res.json({
+          ...buildMockResponse(req.file.originalname || "", "OpenAI 与 LogMeal 都失败，返回模拟识别结果。"),
+          raw: {
+            openaiError: error.message,
+            logmealError: logMealError.message
+          }
+        });
+      }
+    }
 
     return res.json({
-      source: "logmeal",
-      imageId,
-      items,
+      ...buildMockResponse(req.file.originalname || "", "OpenAI 失败，返回模拟识别结果。"),
       raw: {
-        segmentation: segmentationData,
-        nutrition: nutritionData
+        openaiError: error.message
       }
     });
-  } catch (error) {
-    return res.status(500).json({ error: "服务异常", detail: error.message });
   }
 });
 
