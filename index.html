@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>个人简历 | 海外广告投放 · 独立站运营 · 跨境电商技术运营</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'Noto Sans SC', 'system-ui', 'sans-serif']
+          },
+          colors: {
+            ink: '#0a0a0a',
+            paper: '#fafafa',
+            line: '#e5e7eb',
+            muted: '#737373',
+            brand: '#0f766e',
+            accent: '#f59e0b'
+          },
+          boxShadow: {
+            soft: '0 20px 60px rgba(10, 10, 10, 0.08)',
+            fine: '0 8px 30px rgba(10, 10, 10, 0.06)'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Inter, "Noto Sans SC", system-ui, sans-serif;
+      background: #fafafa;
+      color: #0a0a0a;
+    }
+    .slide {
+      min-height: 100vh;
+      padding: clamp(32px, 6vw, 80px);
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #e5e7eb;
+      position: relative;
+      overflow: hidden;
+    }
+    .deck-no {
+      position: absolute;
+      right: clamp(24px, 4vw, 56px);
+      top: 28px;
+      color: #737373;
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .max-copy { max-width: 65ch; }
+    .fade-in {
+      animation: fadeIn .7s ease-out both;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .grid-bg {
+      background-image:
+        linear-gradient(rgba(15,118,110,.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15,118,110,.08) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    .metric-bar { transform-origin: bottom; animation: grow .9s ease-out both; }
+    @keyframes grow { from { transform: scaleY(.2); opacity: .35; } to { transform: scaleY(1); opacity: 1; } }
+    @media print {
+      .slide { min-height: 100vh; page-break-after: always; }
+      body { background: #fafafa; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="slide grid-bg">
+      <div class="deck-no">Resume Deck · 01</div>
+      <div class="w-full max-w-7xl mx-auto fade-in">
+        <div class="inline-flex items-center gap-3 rounded-full border border-line bg-paper/80 px-4 py-2 text-sm font-medium text-brand shadow-sm">
+          <span class="h-2 w-2 rounded-full bg-brand"></span>
+          个人简历
+        </div>
+        <div class="mt-12 grid gap-12 lg:grid-cols-[1.15fr_.85fr] lg:items-end">
+          <div>
+            <h1 class="text-5xl font-black leading-tight tracking-normal sm:text-7xl lg:text-8xl">
+              海外广告投放<br />
+              独立站运营<br />
+              技术运营实习
+            </h1>
+            <p class="mt-8 max-copy text-xl leading-9 text-neutral-700">
+              以广告数据分析、独立站技术支持、前端页面优化与 AI Agent 协同为核心能力，面向跨境电商增长与运营执行场景。
+            </p>
+          </div>
+          <div class="rounded-2xl border border-line bg-paper p-8 shadow-soft">
+            <p class="text-sm font-semibold uppercase tracking-[.16em] text-muted">Target Roles</p>
+            <div class="mt-6 space-y-4 text-2xl font-bold leading-snug">
+              <p>海外广告投放助理（实习）</p>
+              <p>独立站运营助理</p>
+              <p>跨境电商技术运营（实习）</p>
+            </div>
+            <div class="mt-8 border-t border-line pt-6 text-sm leading-7 text-neutral-600">
+              <p>学历：全日专科在读（在校生）</p>
+              <p>V：Marco-12996</p>
+              <p>Email：kaco_0707@QQ.COM</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide bg-paper">
+      <div class="deck-no">Profile · 02</div>
+      <div class="w-full max-w-7xl mx-auto fade-in">
+        <div class="grid gap-10 lg:grid-cols-[.8fr_1.2fr] lg:items-center">
+          <div>
+            <p class="text-sm font-bold uppercase tracking-[.16em] text-brand">Basic Information</p>
+            <h2 class="mt-4 text-4xl font-black leading-tight sm:text-6xl">基本信息</h2>
+            <p class="mt-6 max-copy text-lg leading-8 text-neutral-700">
+              当前身份为全日专科在读学生，职业方向聚焦海外广告投放、独立站运营与跨境电商技术运营实习岗位。
+            </p>
+          </div>
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div class="rounded-2xl border border-line bg-neutral-50 p-6 shadow-fine">
+              <p class="text-sm font-semibold text-muted">意向岗位 01</p>
+              <p class="mt-3 text-2xl font-bold leading-snug">海外广告投放助理（实习）</p>
+            </div>
+            <div class="rounded-2xl border border-line bg-neutral-50 p-6 shadow-fine">
+              <p class="text-sm font-semibold text-muted">意向岗位 02</p>
+              <p class="mt-3 text-2xl font-bold leading-snug">独立站运营助理</p>
+            </div>
+            <div class="rounded-2xl border border-line bg-neutral-50 p-6 shadow-fine">
+              <p class="text-sm font-semibold text-muted">意向岗位 03</p>
+              <p class="mt-3 text-2xl font-bold leading-snug">跨境电商技术运营（实习）</p>
+            </div>
+            <div class="rounded-2xl border border-line bg-brand p-6 text-paper shadow-fine">
+              <p class="text-sm font-semibold text-teal-50">联系方式</p>
+              <p class="mt-3 text-xl font-bold leading-8">V：Marco-12996</p>
+              <p class="text-xl font-bold leading-8">kaco_0707@QQ.COM</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide bg-neutral-50">
+      <div class="deck-no">Capability · 03</div>
+      <div class="w-full max-w-7xl mx-auto fade-in">
+        <div class="max-w-4xl">
+          <p class="text-sm font-bold uppercase tracking-[.16em] text-brand">Core Capability</p>
+          <h2 class="mt-4 text-4xl font-black leading-tight sm:text-6xl">广告投放与数据分析</h2>
+        </div>
+        <div class="mt-12 grid gap-6 lg:grid-cols-[1fr_1fr]">
+          <div class="rounded-2xl border border-line bg-paper p-8 shadow-soft">
+            <h3 class="text-2xl font-black">平台操作与指标理解</h3>
+            <p class="mt-5 text-lg leading-9 text-neutral-700">
+              熟悉 Facebook Ads Manager、TikTok Ads Manager 的基础操作流程，理解 CPM、CTR、CPC、CPA、ROAS 等核心广告指标之间的关系。
+            </p>
+          </div>
+          <div class="rounded-2xl border border-line bg-paper p-8 shadow-soft">
+            <h3 class="text-2xl font-black">保本 ROAS 与漏斗判断</h3>
+            <p class="mt-5 text-lg leading-9 text-neutral-700">
+              能够结合产品售价、供应链成本、物流成本计算保本 ROAS（Breakeven ROAS），具备基础的数据分析思维和成本控制意识，能够通过漏斗数据辅助判断广告表现及优化方向。
+            </p>
+          </div>
+        </div>
+        <div class="mt-10 rounded-2xl border border-line bg-paper p-8 shadow-fine">
+          <div class="grid gap-8 md:grid-cols-5">
+            <div class="text-center">
+              <p class="text-3xl font-black text-brand">CPM</p>
+              <p class="mt-2 text-sm text-muted">曝光成本</p>
+            </div>
+            <div class="text-center">
+              <p class="text-3xl font-black text-brand">CTR</p>
+              <p class="mt-2 text-sm text-muted">点击效率</p>
+            </div>
+            <div class="text-center">
+              <p class="text-3xl font-black text-brand">CPC</p>
+              <p class="mt-2 text-sm text-muted">点击成本</p>
+            </div>
+            <div class="text-center">
+              <p class="text-3xl font-black text-brand">CPA</p>
+              <p class="mt-2 text-sm text-muted">转化成本</p>
+            </div>
+            <div class="text-center">
+              <p class="text-3xl font-black text-brand">ROAS</p>
+              <p class="mt-2 text-sm text-muted">投产表现</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide bg-paper">
+      <div class="deck-no">Capability · 04</div>
+      <div class="w-full max-w-7xl mx-auto fade-in">
+        <div class="grid gap-12 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
+          <div>
+            <p class="text-sm font-bold uppercase tracking-[.16em] text-brand">Tracking & Tech Support</p>
+            <h2 class="mt-4 text-4xl font-black leading-tight sm:text-6xl">独立站与广告技术支持</h2>
+            <p class="mt-6 max-copy text-lg leading-9 text-neutral-700">
+              连接独立站生态、广告像素埋点、浏览器调试与海外广告环境配置，支持广告数据链路稳定运行。
+            </p>
+          </div>
+          <div class="space-y-5">
+            <div class="rounded-2xl border border-line bg-neutral-50 p-6 shadow-fine">
+              <h3 class="text-xl font-black">独立站生态</h3>
+              <p class="mt-3 text-base leading-8 text-neutral-700">了解 Shopify、WordPress 等独立站生态，熟悉 Meta Pixel、TikTok Pixel 的基础埋点逻辑。</p>
+            </div>
+            <div class="rounded-2xl border border-line bg-neutral-50 p-6 shadow-fine">
+              <h3 class="text-xl font-black">事件验证</h3>
+              <p class="mt-3 text-base leading-8 text-neutral-700">能够通过浏览器开发者工具（Network、Console）验证事件回传情况，协助排查像素埋点及数据追踪问题。</p>
+            </div>
+            <div class="rounded-2xl border border-line bg-neutral-50 p-6 shadow-fine">
+              <h3 class="text-xl font-black">海外广告环境配置</h3>
+              <p class="mt-3 text-base leading-8 text-neutral-700">熟悉海外广告环境配置相关知识，了解浏览器环境管理、代理网络配置及常见环境问题排查流程。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide bg-neutral-50">
+      <div class="deck-no">Capability · 05</div>
+      <div class="w-full max-w-7xl mx-auto fade-in">
+        <div class="grid gap-12 lg:grid-cols-[1.05fr_.95fr] lg:items-center">
+          <div>
+            <p class="text-sm font-bold uppercase tracking-[.16em] text-brand">Frontend Optimization</p>
+            <h2 class="mt-4 text-4xl font-black leading-tight sm:text-6xl">前端开发与页面优化</h2>
+            <p class="mt-6 max-copy text-lg leading-9 text-neutral-700">
+              掌握 React、TypeScript、JavaScript、HTML、CSS、Tailwind CSS。能够阅读并修改独立站前端代码，协助完成 Landing Page 页面搭建、响应式适配、组件优化及页面性能调整。
+            </p>
+          </div>
+          <div class="rounded-2xl border border-line bg-paper p-8 shadow-soft">
+            <div class="grid grid-cols-2 gap-4">
+              <div class="rounded-xl bg-neutral-100 p-5 text-center font-black text-brand">React</div>
+              <div class="rounded-xl bg-neutral-100 p-5 text-center font-black text-brand">TypeScript</div>
+              <div class="rounded-xl bg-neutral-100 p-5 text-center font-black text-brand">JavaScript</div>
+              <div class="rounded-xl bg-neutral-100 p-5 text-center font-black text-brand">HTML</div>
+              <div class="rounded-xl bg-neutral-100 p-5 text-center font-black text-brand">CSS</div>
+              <div class="rounded-xl bg-neutral-100 p-5 text-center font-black text-brand">Tailwind CSS</div>
+            </div>
+            <div class="mt-8 h-48 rounded-xl border border-line bg-neutral-50 p-5">
+              <div class="flex items-end gap-4 h-full">
+                <div class="metric-bar w-1/5 rounded-t-xl bg-brand" style="height: 72%"></div>
+                <div class="metric-bar w-1/5 rounded-t-xl bg-teal-600" style="height: 88%; animation-delay: .08s"></div>
+                <div class="metric-bar w-1/5 rounded-t-xl bg-accent" style="height: 64%; animation-delay: .16s"></div>
+                <div class="metric-bar w-1/5 rounded-t-xl bg-neutral-400" style="height: 78%; animation-delay: .24s"></div>
+                <div class="metric-bar w-1/5 rounded-t-xl bg-neutral-700" style="height: 56%; animation-delay: .32s"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide bg-paper">
+      <div class="deck-no">Capability · 06</div>
+      <div class="w-full max-w-7xl mx-auto fade-in">
+        <div class="max-w-4xl">
+          <p class="text-sm font-bold uppercase tracking-[.16em] text-brand">AI Agent Workflow</p>
+          <h2 class="mt-4 text-4xl font-black leading-tight sm:text-6xl">AI Agent 协同工作能力</h2>
+          <p class="mt-6 text-lg leading-9 text-neutral-700 max-copy">
+            熟悉 Codex、Claude Code 等 AI Agent 工具在开发与运营场景中的应用。
+          </p>
+        </div>
+        <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <div class="rounded-2xl border border-line bg-neutral-50 p-7 shadow-fine">
+            <p class="text-4xl font-black text-brand">01</p>
+            <h3 class="mt-5 text-xl font-black">代码调试</h3>
+            <p class="mt-3 leading-7 text-neutral-700">利用 Agent 辅助完成代码调试。</p>
+          </div>
+          <div class="rounded-2xl border border-line bg-neutral-50 p-7 shadow-fine">
+            <p class="text-4xl font-black text-brand">02</p>
+            <h3 class="mt-5 text-xl font-black">页面开发</h3>
+            <p class="mt-3 leading-7 text-neutral-700">利用 Agent 辅助完成页面开发。</p>
+          </div>
+          <div class="rounded-2xl border border-line bg-neutral-50 p-7 shadow-fine">
+            <p class="text-4xl font-black text-brand">03</p>
+            <h3 class="mt-5 text-xl font-black">营销组件优化</h3>
+            <p class="mt-3 leading-7 text-neutral-700">利用 Agent 辅助完成营销组件优化。</p>
+          </div>
+          <div class="rounded-2xl border border-line bg-neutral-50 p-7 shadow-fine">
+            <p class="text-4xl font-black text-brand">04</p>
+            <h3 class="mt-5 text-xl font-black">工作流拆解</h3>
+            <p class="mt-3 leading-7 text-neutral-700">利用 Agent 辅助完成技术问题排查及工作流拆解，提高项目执行效率和学习效率。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide bg-neutral-50">
+      <div class="deck-no">Skills · 07</div>
+      <div class="w-full max-w-7xl mx-auto fade-in">
+        <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p class="text-sm font-bold uppercase tracking-[.16em] text-brand">Skill Stack</p>
+            <h2 class="mt-4 text-4xl font-black leading-tight sm:text-6xl">技能储备</h2>
+          </div>
+          <p class="max-copy text-lg leading-8 text-neutral-700">围绕广告投放、独立站运营、技术能力与 AI 工具形成可执行的复合型基础能力。</p>
+        </div>
+        <div class="mt-12 grid gap-6 lg:grid-cols-4">
+          <div class="rounded-2xl border border-line bg-paper p-7 shadow-soft">
+            <h3 class="text-2xl font-black">广告投放</h3>
+            <ul class="mt-6 space-y-4 text-neutral-700">
+              <li>Facebook Ads 基础操作</li>
+              <li>TikTok Ads 基础操作</li>
+              <li>广告数据分析</li>
+              <li>转化漏斗分析</li>
+              <li>保本 ROAS 测算</li>
+            </ul>
+          </div>
+          <div class="rounded-2xl border border-line bg-paper p-7 shadow-soft">
+            <h3 class="text-2xl font-black">独立站运营</h3>
+            <ul class="mt-6 space-y-4 text-neutral-700">
+              <li>Shopify 基础认知</li>
+              <li>Landing Page 优化</li>
+              <li>Pixel 埋点测试</li>
+              <li>转化链路分析</li>
+            </ul>
+          </div>
+          <div class="rounded-2xl border border-line bg-paper p-7 shadow-soft">
+            <h3 class="text-2xl font-black">技术能力</h3>
+            <ul class="mt-6 space-y-4 text-neutral-700">
+              <li>React</li>
+              <li>TypeScript</li>
+              <li>JavaScript</li>
+              <li>Tailwind CSS</li>
+              <li>Git/GitHub</li>
+              <li>Chrome DevTools</li>
+            </ul>
+          </div>
+          <div class="rounded-2xl border border-line bg-brand p-7 text-paper shadow-soft">
+            <h3 class="text-2xl font-black">AI 工具</h3>
+            <ul class="mt-6 space-y-4 text-teal-50">
+              <li>Codex</li>
+              <li>Claude Code</li>
+              <li>ChatGPT</li>
+              <li>Cursor</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide bg-paper">
+      <div class="deck-no">Project · 08</div>
+      <div class="w-full max-w-7xl mx-auto fade-in">
+        <div class="grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-center">
+          <div>
+            <p class="text-sm font-bold uppercase tracking-[.16em] text-brand">Personal Project</p>
+            <h2 class="mt-4 text-4xl font-black leading-tight sm:text-6xl">海外精品消费品独立站项目</h2>
+            <p class="mt-6 text-2xl font-bold text-neutral-800">个人学习实践</p>
+            <p class="mt-3 text-lg font-semibold text-brand">2026.02 – 至今</p>
+          </div>
+          <div class="rounded-2xl border border-line bg-neutral-50 p-8 shadow-soft">
+            <div class="relative h-72">
+              <svg viewBox="0 0 520 300" class="h-full w-full" role="img" aria-label="项目能力路径图">
+                <rect x="18" y="34" width="140" height="70" rx="18" fill="#0f766e" opacity=".95"></rect>
+                <text x="88" y="75" text-anchor="middle" fill="#fafafa" font-size="16" font-weight="700">广告环境</text>
+                <rect x="190" y="34" width="140" height="70" rx="18" fill="#f59e0b" opacity=".95"></rect>
+                <text x="260" y="75" text-anchor="middle" fill="#0a0a0a" font-size="16" font-weight="700">素材测试</text>
+                <rect x="362" y="34" width="140" height="70" rx="18" fill="#e5e7eb"></rect>
+                <text x="432" y="75" text-anchor="middle" fill="#0a0a0a" font-size="16" font-weight="700">页面优化</text>
+                <rect x="104" y="176" width="140" height="70" rx="18" fill="#e5e7eb"></rect>
+                <text x="174" y="217" text-anchor="middle" fill="#0a0a0a" font-size="16" font-weight="700">Pixel 回传</text>
+                <rect x="276" y="176" width="140" height="70" rx="18" fill="#0f766e" opacity=".95"></rect>
+                <text x="346" y="217" text-anchor="middle" fill="#fafafa" font-size="16" font-weight="700">数据优化</text>
+                <path d="M158 69 H190" stroke="#737373" stroke-width="2" stroke-dasharray="6 6"></path>
+                <path d="M330 69 H362" stroke="#737373" stroke-width="2" stroke-dasharray="6 6"></path>
+                <path d="M432 104 C432 150 384 148 346 176" stroke="#737373" stroke-width="2" fill="none" stroke-dasharray="6 6"></path>
+                <path d="M276 211 H244" stroke="#737373" stroke-width="2" stroke-dasharray="6 6"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide bg-neutral-50">
+      <div class="deck-no">Project · 09</div>
+      <div class="w-full max-w-7xl mx-auto fade-in">
+        <div class="max-w-4xl">
+          <p class="text-sm font-bold uppercase tracking-[.16em] text-brand">Project Module 01</p>
+          <h2 class="mt-4 text-4xl font-black leading-tight sm:text-6xl">广告环境配置与技术排查</h2>
+        </div>
+        <div class="mt-12 grid gap-6 lg:grid-cols-3">
+          <div class="rounded-2xl border border-line bg-paper p-8 shadow-soft lg:col-span-2">
+            <p class="text-xl leading-10 text-neutral-700">
+              为学习海外广告投放流程，自主搭建并维护广告测试环境。
+            </p>
+            <p class="mt-6 text-xl leading-10 text-neutral-700">
+              独立解决网络配置、时区同步、浏览器环境等常见问题，并结合 AI Agent 工具辅助分析技术问题，提升故障定位与解决效率。
+            </p>
+          </div>
+          <div class="rounded-2xl border border-line bg-brand p-8 text-paper shadow-soft">
+            <p class="text-sm font-semibold uppercase tracking-[.14em] text-teal-50">Scope</p>
+            <div class="mt-8 space-y-5 text-2xl font-black">
+              <p>网络配置</p>
+              <p>时区同步</p>
+              <p>浏览器环境</p>
+              <p>AI Agent 辅助分析</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide bg-paper">
+      <div class="deck-no">Project · 10</div>
+      <div class="w-full max-w-7xl mx-auto fade-in">
+        <div class="grid gap-12 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
+          <div>
+            <p class="text-sm font-bold uppercase tracking-[.16em] text-brand">Project Module 02</p>
+            <h2 class="mt-4 text-4xl font-black leading-tight sm:text-6xl">素材测试与创意研究</h2>
+            <p class="mt-6 max-copy text-lg leading-9 text-neutral-700">
+              在有限预算下进行测品练习，持续研究不同广告创意形式对点击率和互动率的影响。
+            </p>
+            <p class="mt-5 max-copy text-lg leading-9 text-neutral-700">
+              针对不同商品特点测试图片轮播、短视频等素材形式，记录 CTR、CPC 等关键指标变化，培养素材分析能力。
+            </p>
+          </div>
+          <div class="rounded-2xl border border-line bg-neutral-50 p-8 shadow-soft">
+            <div class="grid gap-5">
+              <div class="rounded-xl border border-line bg-paper p-5">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold">图片轮播</span>
+                  <span class="text-sm text-muted">Creative Format</span>
+                </div>
+                <div class="mt-4 h-3 rounded-full bg-neutral-200">
+                  <div class="h-3 w-3/4 rounded-full bg-brand"></div>
+                </div>
+              </div>
+              <div class="rounded-xl border border-line bg-paper p-5">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold">短视频</span>
+                  <span class="text-sm text-muted">Creative Format</span>
+                </div>
+                <div class="mt-4 h-3 rounded-full bg-neutral-200">
+                  <div class="h-3 w-5/6 rounded-full bg-accent"></div>
+                </div>
+              </div>
+              <div class="grid grid-cols-2 gap-4 pt-2">
+                <div class="rounded-xl bg-paper p-5 text-center border border-line">
+                  <p class="text-3xl font-black text-brand">CTR</p>
+                  <p class="mt-2 text-sm text-muted">关键指标变化</p>
+                </div>
+                <div class="rounded-xl bg-paper p-5 text-center border border-line">
+                  <p class="text-3xl font-black text-brand">CPC</p>
+                  <p class="mt-2 text-sm text-muted">关键指标变化</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide bg-neutral-50">
+      <div class="deck-no">Project · 11</div>
+      <div class="w-full max-w-7xl mx-auto fade-in">
+        <div class="max-w-4xl">
+          <p class="text-sm font-bold uppercase tracking-[.16em] text-brand">Project Module 03</p>
+          <h2 class="mt-4 text-4xl font-black leading-tight sm:text-6xl">Landing Page 搭建与优化</h2>
+        </div>
+        <div class="mt-12 grid gap-8 lg:grid-cols-[1fr_1fr]">
+          <div class="rounded-2xl border border-line bg-paper p-8 shadow-soft">
+            <p class="text-xl leading-10 text-neutral-700">
+              利用 React、Tailwind CSS 结合 Codex 等 AI Agent 工具快速搭建产品 Landing Page。
+            </p>
+            <p class="mt-6 text-xl leading-10 text-neutral-700">
+              完成页面布局开发、移动端适配及组件优化，并根据用户浏览体验持续调整页面结构。
+            </p>
+          </div>
+          <div class="rounded-2xl border border-line bg-paper p-6 shadow-soft">
+            <div class="rounded-xl border border-line bg-neutral-100 p-4">
+              <div class="flex gap-2">
+                <span class="h-3 w-3 rounded-full bg-red-400"></span>
+                <span class="h-3 w-3 rounded-full bg-yellow-400"></span>
+                <span class="h-3 w-3 rounded-full bg-green-500"></span>
+              </div>
+              <div class="mt-5 grid gap-4">
+                <div class="h-10 rounded-lg bg-brand"></div>
+                <div class="grid grid-cols-2 gap-4">
+                  <div class="h-28 rounded-lg bg-neutral-300"></div>
+                  <div class="space-y-3">
+                    <div class="h-5 rounded bg-neutral-300"></div>
+                    <div class="h-5 rounded bg-neutral-300"></div>
+                    <div class="h-5 w-2/3 rounded bg-neutral-300"></div>
+                    <div class="h-9 w-1/2 rounded bg-accent"></div>
+                  </div>
+                </div>
+                <div class="grid grid-cols-3 gap-3">
+                  <div class="h-16 rounded-lg bg-neutral-300"></div>
+                  <div class="h-16 rounded-lg bg-neutral-300"></div>
+                  <div class="h-16 rounded-lg bg-neutral-300"></div>
+                </div>
+              </div>
+            </div>
+            <p class="mt-5 text-sm font-semibold text-muted">页面布局 · 移动端适配 · 组件优化 · 页面结构调整</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide bg-paper">
+      <div class="deck-no">Project · 12</div>
+      <div class="w-full max-w-7xl mx-auto fade-in">
+        <div class="grid gap-10 lg:grid-cols-[.85fr_1.15fr] lg:items-center">
+          <div>
+            <p class="text-sm font-bold uppercase tracking-[.16em] text-brand">Project Module 04</p>
+            <h2 class="mt-4 text-4xl font-black leading-tight sm:text-6xl">Pixel 埋点与数据回传测试</h2>
+            <p class="mt-6 max-copy text-lg leading-9 text-neutral-700">
+              自主完成 ViewContent、AddToCart、Purchase 等关键事件埋点。
+            </p>
+            <p class="mt-5 max-copy text-lg leading-9 text-neutral-700">
+              通过浏览器开发者工具验证事件触发与数据回传情况，确保广告平台能够准确获取转化数据。
+            </p>
+          </div>
+          <div class="rounded-2xl border border-line bg-neutral-50 p-8 shadow-soft">
+            <div class="space-y-4">
+              <div class="flex items-center gap-4 rounded-xl border border-line bg-paper p-5">
+                <span class="flex h-12 w-12 items-center justify-center rounded-full bg-brand text-lg font-black text-paper">1</span>
+                <div>
+                  <p class="text-xl font-black">ViewContent</p>
+                  <p class="text-sm text-muted">关键事件埋点</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-4 rounded-xl border border-line bg-paper p-5">
+                <span class="flex h-12 w-12 items-center justify-center rounded-full bg-brand text-lg font-black text-paper">2</span>
+                <div>
+                  <p class="text-xl font-black">AddToCart</p>
+                  <p class="text-sm text-muted">关键事件埋点</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-4 rounded-xl border border-line bg-paper p-5">
+                <span class="flex h-12 w-12 items-center justify-center rounded-full bg-accent text-lg font-black text-ink">3</span>
+                <div>
+                  <p class="text-xl font-black">Purchase</p>
+                  <p class="text-sm text-muted">关键事件埋点</p>
+                </div>
+              </div>
+            </div>
+            <div class="mt-6 rounded-xl bg-ink p-5 font-mono text-sm leading-7 text-teal-100">
+              <p>&gt; DevTools: Network / Console</p>
+              <p>&gt; verify event trigger</p>
+              <p>&gt; confirm data callback</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide bg-neutral-50">
+      <div class="deck-no">Project · 13</div>
+      <div class="w-full max-w-7xl mx-auto fade-in">
+        <div class="max-w-4xl">
+          <p class="text-sm font-bold uppercase tracking-[.16em] text-brand">Project Module 05</p>
+          <h2 class="mt-4 text-4xl font-black leading-tight sm:text-6xl">数据监控与优化练习</h2>
+        </div>
+        <div class="mt-12 grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-stretch">
+          <div class="rounded-2xl border border-line bg-paper p-8 shadow-soft">
+            <p class="text-xl leading-10 text-neutral-700">
+              结合产品成本、物流成本及广告成本建立基础利润模型。
+            </p>
+            <p class="mt-6 text-xl leading-10 text-neutral-700">
+              持续观察 CTR、CVR、CPA、ROAS 等指标变化，分析转化漏斗各环节表现，培养数据驱动优化思维。
+            </p>
+          </div>
+          <div class="rounded-2xl border border-line bg-paper p-8 shadow-soft">
+            <div class="grid grid-cols-4 gap-4">
+              <div class="rounded-xl bg-neutral-100 p-5 text-center">
+                <p class="text-3xl font-black text-brand">CTR</p>
+                <p class="mt-2 text-xs text-muted">点击率</p>
+              </div>
+              <div class="rounded-xl bg-neutral-100 p-5 text-center">
+                <p class="text-3xl font-black text-brand">CVR</p>
+                <p class="mt-2 text-xs text-muted">转化率</p>
+              </div>
+              <div class="rounded-xl bg-neutral-100 p-5 text-center">
+                <p class="text-3xl font-black text-brand">CPA</p>
+                <p class="mt-2 text-xs text-muted">获客成本</p>
+              </div>
+              <div class="rounded-xl bg-neutral-100 p-5 text-center">
+                <p class="text-3xl font-black text-brand">ROAS</p>
+                <p class="mt-2 text-xs text-muted">广告回报</p>
+              </div>
+            </div>
+            <div class="mt-8 space-y-4">
+              <div>
+                <div class="mb-2 flex justify-between text-sm font-semibold"><span>产品成本</span><span>Profit Model</span></div>
+                <div class="h-3 rounded-full bg-neutral-200"><div class="h-3 w-2/3 rounded-full bg-brand"></div></div>
+              </div>
+              <div>
+                <div class="mb-2 flex justify-between text-sm font-semibold"><span>物流成本</span><span>Cost Layer</span></div>
+                <div class="h-3 rounded-full bg-neutral-200"><div class="h-3 w-1/2 rounded-full bg-accent"></div></div>
+              </div>
+              <div>
+                <div class="mb-2 flex justify-between text-sm font-semibold"><span>广告成本</span><span>Optimization</span></div>
+                <div class="h-3 rounded-full bg-neutral-200"><div class="h-3 w-5/6 rounded-full bg-neutral-700"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide bg-paper">
+      <div class="deck-no">Fit · 14</div>
+      <div class="w-full max-w-7xl mx-auto fade-in">
+        <div class="grid gap-12 lg:grid-cols-[.95fr_1.05fr] lg:items-center">
+          <div>
+            <p class="text-sm font-bold uppercase tracking-[.16em] text-brand">Value Proposition</p>
+            <h2 class="mt-4 text-4xl font-black leading-tight sm:text-6xl">能力组合如何服务团队</h2>
+          </div>
+          <div class="grid gap-5">
+            <div class="rounded-2xl border border-line bg-neutral-50 p-6 shadow-fine">
+              <h3 class="text-xl font-black">广告投放执行</h3>
+              <p class="mt-3 leading-8 text-neutral-700">基于 Facebook Ads、TikTok Ads 基础操作与广告数据分析，支持投放流程、素材测试和指标复盘。</p>
+            </div>
+            <div class="rounded-2xl border border-line bg-neutral-50 p-6 shadow-fine">
+              <h3 class="text-xl font-black">独立站增长支持</h3>
+              <p class="mt-3 leading-8 text-neutral-700">基于 Shopify 认知、Landing Page 优化、Pixel 埋点测试和转化链路分析，支持站点运营与转化追踪。</p>
+            </div>
+            <div class="rounded-2xl border border-line bg-neutral-50 p-6 shadow-fine">
+              <h3 class="text-xl font-black">技术协作效率</h3>
+              <p class="mt-3 leading-8 text-neutral-700">基于 React、TypeScript、Tailwind CSS、Git/GitHub、Chrome DevTools 与 AI 工具，提升页面修改、问题定位与执行效率。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide bg-neutral-50">
+      <div class="deck-no">Self Review · 15</div>
+      <div class="w-full max-w-7xl mx-auto fade-in">
+        <div class="max-w-5xl">
+          <p class="text-sm font-bold uppercase tracking-[.16em] text-brand">Self Assessment</p>
+          <h2 class="mt-4 text-4xl font-black leading-tight sm:text-6xl">自我评价</h2>
+          <div class="mt-10 rounded-2xl border border-line bg-paper p-8 shadow-soft">
+            <p class="text-xl leading-10 text-neutral-700">
+              具备较强的自学能力和执行力，在校期间持续利用 Codex、Claude Code 等 AI Agent 工具辅助学习与项目实践，逐步打通前端开发、独立站运营、广告投放及数据分析等多个环节。
+            </p>
+            <p class="mt-7 text-xl leading-10 text-neutral-700">
+              面对技术问题能够主动查阅资料并独立解决，学习速度快、责任心强，愿意从基础工作做起。希望能够进入真实商业团队，在海外广告投放、独立站运营及跨境电商技术支持方向持续成长，为团队创造价值。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide bg-brand text-paper">
+      <div class="deck-no text-teal-50">Contact · 16</div>
+      <div class="w-full max-w-7xl mx-auto fade-in">
+        <div class="grid gap-12 lg:grid-cols-[1fr_.9fr] lg:items-end">
+          <div>
+            <p class="text-sm font-bold uppercase tracking-[.16em] text-teal-50">Thanks / Contact</p>
+            <h2 class="mt-4 text-5xl font-black leading-tight sm:text-7xl">期待进入真实商业团队持续成长</h2>
+            <p class="mt-8 max-copy text-xl leading-9 text-teal-50">
+              方向：海外广告投放、独立站运营、跨境电商技术支持。
+            </p>
+          </div>
+          <div class="rounded-2xl border border-teal-500 bg-teal-900/30 p-8 shadow-soft">
+            <p class="text-sm font-semibold uppercase tracking-[.16em] text-teal-50">Contact</p>
+            <div class="mt-8 space-y-6">
+              <div>
+                <p class="text-sm text-teal-50">WeChat</p>
+                <p class="mt-2 text-3xl font-black">Marco-12996</p>
+              </div>
+              <div>
+                <p class="text-sm text-teal-50">Email</p>
+                <p class="mt-2 text-3xl font-black break-words">kaco_0707@QQ.COM</p>
+              </div>
+              <div class="border-t border-teal-500 pt-6">
+                <p class="text-lg font-bold leading-8">全日专科在读（在校生）</p>
+                <p class="mt-2 text-teal-50">海外广告投放助理（实习）｜独立站运营助理｜跨境电商技术运营（实习）</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
